@@ -1,10 +1,13 @@
+import React, { useState } from "react";
+
 import "./App.css";
 import Expenses from "./components/Expenses";
 import "./components/Expenses/Expenses.css";
 import Card from "./components/UI/Card/Card";
+import NewExpense from "./components/NewExpense/NewExpense";
 
-function App() {
-  const expenses = [
+const App = () => {
+  const [expenses, setExpenses] = useState([
     {
       id: "e1",
       title: "Toilet Paper",
@@ -24,16 +27,30 @@ function App() {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
-  ];
+  ]);
+
+  const sortById = (a, b) => {
+    if (a.id > b.id) {
+      return -1;
+    }
+    return 1;
+  };
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevState) => {
+      return [...prevState, expense].sort(sortById);
+    });
+  };
 
   return (
     <div className="App">
-      <h2>Expense tracker app</h2>
+      <h2>Expense tracker</h2>
+      <NewExpense addExpenseHandler={addExpenseHandler} expenses={expenses} />
       <Card className="expenses">
-        <Expenses expenses={expenses} />
+        <Expenses expenses={expenses.sort(sortById)} />
       </Card>
     </div>
   );
-}
+};
 
 export default App;
