@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "./ExpenseForm.css";
 
-const ExpressForm = ({ saveExpenseHandler }) => {
+const ExpressForm = ({ onSaveExpense }) => {
   const [expenseInput, setExpenseInput] = useState({
     inputTitle: "",
     inputAmount: "",
@@ -28,7 +28,7 @@ const ExpressForm = ({ saveExpenseHandler }) => {
       date: new Date(expenseInput.inputDate),
     };
 
-    saveExpenseHandler(expense);
+    onSaveExpense(expense);
     setExpenseInput({ inputTitle: "", inputAmount: "", inputDate: "" });
   };
 
