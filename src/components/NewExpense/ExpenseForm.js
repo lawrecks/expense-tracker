@@ -2,6 +2,16 @@ import React, { useState } from "react";
 
 import "./ExpenseForm.css";
 
+const date = new Date();
+
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+
+let currentDate = `${year}-${month < 10 ? "0" + month : month}-${
+  day < 10 ? "0" + day : day
+}`;
+
 const ExpressForm = ({ onSaveExpense }) => {
   const [expenseInput, setExpenseInput] = useState({
     inputTitle: "",
@@ -38,6 +48,7 @@ const ExpressForm = ({ onSaveExpense }) => {
         <div className="new-expense__control">
           <label>Title</label>
           <input
+            required={true}
             type="text"
             value={expenseInput.inputTitle}
             onChange={(event) =>
@@ -48,6 +59,7 @@ const ExpressForm = ({ onSaveExpense }) => {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
+            required={true}
             type="number"
             value={expenseInput.inputAmount}
             min="0.01"
@@ -60,10 +72,11 @@ const ExpressForm = ({ onSaveExpense }) => {
         <div className="new-expense__control">
           <label>Date</label>
           <input
+            required={true}
             type="date"
             value={expenseInput.inputDate}
             min="2019-01-01"
-            max="2022-12-31"
+            max={currentDate}
             onChange={(event) => inputChangeHandler("date", event.target.value)}
           />
         </div>

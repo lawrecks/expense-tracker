@@ -1,25 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./ExpensesFilter.css";
-import { DUMMY_EXPENSES } from "../../App";
 
-const ExpensesFilter = ({ onUpdateExpenses }) => {
-  const [filteredYear, setFilteredYear] = useState("");
-
+const ExpensesFilter = ({ onChangeExpenses, selectedYear }) => {
   const expenseFilterHandler = (e) => {
-    setFilteredYear(e.target.value);
-    const filteredExpenses = DUMMY_EXPENSES.filter(
-      (expense) => expense.date.getFullYear().toString() === e.target.value
-    );
-    onUpdateExpenses(filteredExpenses);
+    onChangeExpenses(e.target.value);
   };
 
   return (
     <div className="expenses-filter">
       <div className="expenses-filter__control">
         <label>Filter by year</label>
-        <select onChange={expenseFilterHandler} value={filteredYear}>
-          <option hidden={true}></option>
+        <select onChange={expenseFilterHandler} value={selectedYear}>
+          <option>All</option>
+          <option value="2023">2023</option>
           <option value="2022">2022</option>
           <option value="2021">2021</option>
           <option value="2020">2020</option>

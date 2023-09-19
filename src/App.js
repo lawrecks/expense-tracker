@@ -26,6 +26,18 @@ export const DUMMY_EXPENSES = [
     amount: 450,
     date: new Date(2021, 5, 12),
   },
+  {
+    id: "e5",
+    title: "New Chair",
+    amount: 230,
+    date: new Date(2023, 5, 12),
+  },
+  {
+    id: "e6",
+    title: "Power Bills",
+    amount: 500,
+    date: new Date(2023, 3, 1),
+  },
 ];
 
 const App = () => {
@@ -37,19 +49,12 @@ const App = () => {
     });
   };
 
-  const changeExpensesHandler = (expenses) => {
-    setExpenses(expenses.sort(sortById));
-  };
-
   return (
     <div className="App">
       <h2>Expense tracker</h2>
       <NewExpense onAddExpense={addExpenseHandler} expenses={expenses} />
       <div>
-        <Expenses
-          onChangeExpenses={changeExpensesHandler}
-          expenses={expenses.sort(sortById)}
-        />
+        <Expenses expenses={expenses} />
       </div>
     </div>
   );
